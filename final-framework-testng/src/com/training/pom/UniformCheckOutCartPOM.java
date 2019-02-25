@@ -25,6 +25,9 @@ private WebDriver driver;
 	private WebElement productRemovalFromCart;
 	@FindBy(xpath="//div[@id='content']//p[contains(text(),'Your shopping cart is empty!')]")
 	private WebElement productRemovedSuccessAlert;
+	//checkout button
+	@FindBy(xpath="//a[@class='btn btn-primary']")
+	private WebElement checkOutButton;
 	
 	
 	
@@ -46,6 +49,11 @@ private WebDriver driver;
 	public void clickRemoveProductFromcart() {
 		// TODO Auto-generated method stub
 		this.productRemovalFromCart.click();
+	}
+	//to click checkout
+	public void clickCheckOutButton() {
+		// TODO Auto-generated method stub
+		this.checkOutButton.click();
 	}
 }
 

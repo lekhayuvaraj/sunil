@@ -18,6 +18,9 @@ private WebDriver driver;
 	private WebElement password;
 	@FindBy(xpath="//button[@type='submit']")
 	private WebElement loginbutton;
+	//alertmessage
+	@FindBy(xpath="//div[@class='alert alert-danger']")
+	private WebElement alertMessage;
 	
 	public void sendusername(String username) {
 		this.username.clear();
@@ -29,6 +32,9 @@ private WebDriver driver;
 	}
 	public void clickLoginButton() {
 		this.loginbutton.click(); 
+	}
+	public String getAlertMessage() {
+		return this.alertMessage.getText();
 	}
 }
 

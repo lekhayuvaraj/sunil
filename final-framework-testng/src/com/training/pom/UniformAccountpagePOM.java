@@ -12,6 +12,10 @@ private WebDriver driver;
 		this.driver = driver; 
 		PageFactory.initElements(driver, this);
 	}
+	//Link to go to store
+	@FindBy(xpath="//a[contains(text(),'Uniform Store')]")
+	private WebElement uniformStore;
+	
 	@FindBy(xpath="//a[contains(text(),'Edit your account information')]")
 	private WebElement editAccountInfo;
 	@FindBy(xpath="//a[contains(text(),'Change your password')]")
@@ -23,6 +27,12 @@ private WebDriver driver;
 	
 	@FindBy(xpath="//div[@class='alert alert-success']")
 	private WebElement successPasswordAlert;
+	//usericon
+	@FindBy(xpath="//span[@class='caret']")
+	private WebElement userIconLekha;
+	//orderhistory
+	@FindBy(xpath="//ul[@class='dropdown-menu dropdown-menu-right myaccount-menu']//a[contains(text(),'Order History')]")
+	private WebElement orderHistory;
 	
 
 	public void clickEditAccountInfoButton() {
@@ -40,5 +50,14 @@ private WebDriver driver;
 	public String displaySuccessAlert() {
 		return this.successPasswordAlert.getText();
 	}
+	//method to go to uniform store
+	public void moveToUniformStore() {
+		this.uniformStore.click();
+}
+	public void goToOrderHistory() {
+		this.userIconLekha.click();
+		orderHistory.click();
+}
+
 }
 

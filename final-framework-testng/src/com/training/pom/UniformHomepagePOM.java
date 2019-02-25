@@ -26,6 +26,15 @@ private WebDriver driver;
 	private WebElement shopUniformLink;
 	@FindBy(xpath="//img[@title='Regular T-Shirt (Royal Blue)']")
 	private WebElement regularTshirtRoyalBlue;
+	//regular Tshirt Yellow
+	//@FindBy(xpath="//img[@title='REGULAR T-SHIRTS (YELLOW)']")
+	@FindBy(xpath="//*[@id=\"featured-carousel\"]/div/div/div[2]/div/div/div[1]/a/img")
+	private WebElement regularTshirtYellow;
+	//regular Rust Yellow
+		
+		@FindBy(xpath="//*[@id=\"featured-carousel\"]/div/div/div[3]/div/div/div[1]/a/img")
+		private WebElement regularTshirtRust;
+	
 	public void clickMyAccount() {
 		this.myaccount.click();
 	}
@@ -44,6 +53,16 @@ public void clickPremiumUniformShopLink() {
 public void clickRegulatTshirtRoyalBlue() {
 	
 	this.regularTshirtRoyalBlue.click(); 
+}
+//select the yellow Tshirt
+public void clickRegulatTshirtYellow() {
+	
+	this.regularTshirtYellow.click(); 
+}
+//select the Rust Tshirt
+public void clickRegulatTshirtRust() {
+	
+	this.regularTshirtRust.click(); 
 }
 }
 

@@ -1,0 +1,112 @@
+package com.training.sanity.tests;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.http.impl.conn.tsccm.WaitingThread;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import com.training.generics.ScreenShot;
+import com.training.pom.LoginPOM;
+import com.training.pom.UniformAccountpagePOM;
+import com.training.pom.UniformChangePasswordpagePOM;
+import com.training.pom.UniformCheckOutCartPOM;
+import com.training.pom.UniformCheckOutCartStepsPOM;
+import com.training.pom.UniformHomepagePOM;
+import com.training.pom.UniformLoginpagePOM;
+import com.training.pom.UniformOrderHistoryPagePOM;
+import com.training.pom.UniformOrderInformationPagePOM;
+import com.training.pom.UniformOrderPlacedPagePOM;
+import com.training.pom.UniformProductReturnsPagePOM;
+import com.training.pom.UniformProductReturnsSuccessPagePOM;
+import com.training.pom.UniformRustProductDetailsPOM;
+import com.training.pom.UniformYellowProductDetailsPOM;
+import com.training.utility.DriverFactory;
+import com.training.utility.DriverNames;
+
+public class UniformReturnOrderedProductTests {
+
+	private WebDriver driver;
+	private String baseUrl;
+	private static UniformHomepagePOM homepagePOM;
+	private static UniformLoginpagePOM loginpagePOM;
+	private static UniformAccountpagePOM accountpagePOM;
+	private static UniformYellowProductDetailsPOM yellowTshirtPagePOM;
+	private static UniformRustProductDetailsPOM rustTshirtPagePOM;
+	private static UniformCheckOutCartPOM checkoutPOM;
+	private static UniformCheckOutCartStepsPOM checkoutStepsPOM;
+	private static UniformOrderPlacedPagePOM orderPlacedPOM;
+	private static UniformOrderHistoryPagePOM orderHistoryPOM;
+	private static UniformOrderInformationPagePOM orderInformationPOM;
+	private static UniformProductReturnsPagePOM productReturnsPOM;
+	private static UniformProductReturnsSuccessPagePOM productReturnsSuccessPOM;
+	
+	private static Properties properties;
+	private ScreenShot screenShot;
+
+	@BeforeClass
+	public  void setUpBeforeClass() throws IOException {
+		properties = new Properties();
+		FileInputStream inStream = new FileInputStream("./resources/others.properties");
+		properties.load(inStream);
+		driver = DriverFactory.getDriver(DriverNames.CHROME);
+		homepagePOM = new UniformHomepagePOM(driver);
+		loginpagePOM = new UniformLoginpagePOM(driver);
+		accountpagePOM = new UniformAccountpagePOM(driver);
+		yellowTshirtPagePOM = new UniformYellowProductDetailsPOM(driver);
+		rustTshirtPagePOM = new UniformRustProductDetailsPOM(driver);
+		checkoutPOM = new UniformCheckOutCartPOM(driver);
+		checkoutStepsPOM = new UniformCheckOutCartStepsPOM(driver);
+		orderPlacedPOM = new UniformOrderPlacedPagePOM(driver);
+		orderHistoryPOM = new UniformOrderHistoryPagePOM(driver);
+		orderInformationPOM = new UniformOrderInformationPagePOM(driver);
+		productReturnsPOM = new UniformProductReturnsPagePOM(driver);
+		productReturnsSuccessPOM = new UniformProductReturnsSuccessPagePOM(driver);
+		baseUrl = properties.getProperty("baseURL");
+		screenShot = new ScreenShot(driver); 
+		// open the browser 
+		driver.get(baseUrl);
+	}
+
+	
+		@Test(priority=1)
+		public void OrderProductTest() {
+		homepagePOM.clickMyAccount();
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		homepagePOM.clickLoginButton();
+		loginpagePOM.sendEmailId("indujayuvaraj@gmail.com");
+		loginpagePOM.sendPassword("lekha123");
+		loginpagePOM.clickLoginButton();
+		accountpagePOM.goToOrderHistory();
+		orderHistoryPOM.clickOnViewOrder();
+		orderInformationPOM.clickToReturnProduct();
+		productReturnsPOM.selectReasonForReturn();
+		productReturnsPOM.selectProductOpened();
+		productReturnsPOM.enterFaultComments("Incorrect Item");
+		productReturnsPOM.selectCheckBox();
+		productReturnsPOM.clickSubmitButton();
+		String message1 = productReturnsSuccessPOM.getSuccessMessage1(); 
+		String message2 = productReturnsSuccessPOM.getSuccessMessage2();
+		String actual = message1+message2;
+		String expected = "Thank you for submitting your return request. Your request has been sent to the relevant department for processing.You will be notified via e-mail as to the status of your request.";
+		Assert.assertTrue(expected.contains(actual));
+		screenShot.captureScreenShot("ProductReturned");
+	}
+	
+	@AfterClass
+	public void tearDown() throws Exception {
+		Thread.sleep(1000);
+		driver.quit();
+	}
+	
+	
+}

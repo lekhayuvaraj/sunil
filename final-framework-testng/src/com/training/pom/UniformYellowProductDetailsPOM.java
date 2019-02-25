@@ -7,19 +7,22 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class UniformRoyalBlueProductPOM {
+public class UniformYellowProductDetailsPOM {
 private WebDriver driver; 
 	
-	public UniformRoyalBlueProductPOM(WebDriver driver) {
+	public UniformYellowProductDetailsPOM(WebDriver driver) {
 		this.driver = driver; 
 		PageFactory.initElements(driver, this);
 	}
 	
 	
 	
-	@FindBy(xpath="//select[@name='option[389]']")
+	@FindBy(xpath="//select[@name='option[382]']")
 	private WebElement chestsizeDropdown;
-	@FindBy(xpath="//button[@id='button-cart']")
+	//quantity
+	@FindBy(xpath="//input[@id='input-quantity']")
+	private WebElement quantity;
+	@FindBy(xpath="//*[@id=\"button-cart\"]") 
 	private WebElement addCartButton;
 	@FindBy(xpath="//div[@class='alert alert-success']")
 	private WebElement successAlertCartAdded;
@@ -29,7 +32,7 @@ private WebDriver driver;
 	public void selectChestSize() {
 		
 		      Select drop = new Select(chestsizeDropdown);
-		      drop.selectByIndex(1);  
+		      drop.selectByIndex(3);  
 	
 	}
 	
@@ -37,14 +40,17 @@ private WebDriver driver;
 		this.addCartButton.click(); 
 		
 	}
-	public void displayAddedToCartSuccessAlert() {
-		
-		this.successAlertCartAdded.getText();
-	}
+	
 public void viewCart() {
 		
 		this.viewCart.click(); 
 	}
+public void enterTheQuantity(String i) {
+	this.quantity.clear();
+	this.quantity.sendKeys(""+i);
+}
+
+
 
 }
 
