@@ -25,6 +25,10 @@ private WebDriver driver;
 	@FindBy(xpath="//a[contains(text(),'Modify your wish list')]")
 	private WebElement modifyWishlist;
 	
+	//order history
+	@FindBy(xpath="//*[@id=\"content\"]/ul[3]/li[1]/a")
+	private WebElement viewOderHistory;
+	
 	@FindBy(xpath="//div[@class='alert alert-success']")
 	private WebElement successPasswordAlert;
 	//usericon

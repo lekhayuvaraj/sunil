@@ -37,24 +37,28 @@ private WebDriver driver;
 	private WebElement deletebutton;
 	
 	
-	public void addCategoryName(String categoryname) {
+	public String addCategoryName(String categoryname) {
 		// TODO Auto-generated method stub
 		categoryName.sendKeys(categoryname);
+		return this.categoryName.getAttribute("value");
 		
 	}
-	public void addCategoryDescription(String description) {
+	public String addCategoryDescription(String description) {
 		// TODO Auto-generated method stub
 		categoryDescription.sendKeys(description);
+		return this.categoryDescription.getAttribute("value") ;
 		
 	}
 	
-	public void addCategoryTagTitle(String tagtitle) {
+	public String addCategoryTagTitle(String tagtitle) {
 		// TODO Auto-generated method stub
 		categoryMetatagTitle.sendKeys(tagtitle);
+		return categoryMetatagTitle.getAttribute("value") ;
 	}
-	public void addCategoryTagDescription(String tagdescription) {
+	public String addCategoryTagDescription(String tagdescription) {
 		// TODO Auto-generated method stub
 		categoryMetatagDescription.sendKeys(tagdescription);
+		return categoryMetatagDescription.getAttribute("value");
 	}
 	public void clickSave() {
 		// TODO Auto-generated method stub

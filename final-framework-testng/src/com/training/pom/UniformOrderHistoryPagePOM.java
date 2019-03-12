@@ -19,10 +19,20 @@ public class UniformOrderHistoryPagePOM {
 	@FindBy(xpath = "//tr[.//td='#24']//a")
 	private WebElement viewOrderForOrderID24;
 	
+	//status for order
+	@FindBy(xpath = "//*[@id=\"content\"]/div[1]/table/tbody/tr[1]/td[4]")
+	private WebElement statusForOrderID24;
+	
+	
 
 	
 	public void clickOnViewOrder() {
 
 		viewOrderForOrderID24.click();
+	}
+	
+	public String getOrderStatus() {
+
+		return statusForOrderID24.getText();
 	}
 }

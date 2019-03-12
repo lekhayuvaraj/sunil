@@ -18,7 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *      participatns are asked to refractor this path in the property file and
  *      access.
  */
-public class ApachePOIExcelRead {
+public class ApachePOIExcelReadAddProducts {
 	public  String [][] getExcelContent(String fileName) {
 		int rowCount =0; 
 		String [][] list1 = null; 
@@ -31,7 +31,7 @@ public class ApachePOIExcelRead {
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
 
 			// Get first/desired sheet from the workbook
-			XSSFSheet sheet = workbook.getSheetAt(0);
+			XSSFSheet sheet = workbook.getSheetAt(1);
 			
 			int rowTotal = sheet.getLastRowNum();
 
@@ -91,7 +91,7 @@ public class ApachePOIExcelRead {
 	public static void main(String[] args) {
 		String fileName = "C:\\Users\\LekhaYuvaraj\\Documents\\automation testing\\TestData\\ComplexTestData.xlsx";
 		
-		for(String [] temp : new ApachePOIExcelRead().getExcelContent(fileName)){
+		for(String [] temp : new ApachePOIExcelReadAddProducts().getExcelContent(fileName)){
 			for(String  tt : temp){
 				System.out.println(tt);
 			}

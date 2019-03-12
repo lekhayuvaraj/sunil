@@ -33,6 +33,10 @@ public class UniformCheckOutCartStepsPOM {
 	// step 4-Delivery method
 	@FindBy(xpath = "//*[@id=\"collapse-shipping-method\"]/div/div[1]")
 	private WebElement freeShipping;
+	
+	//step 4 comments box
+	@FindBy(xpath = "//*[@id=\"collapse-shipping-method\"]/div/p[4]/textarea")
+	private WebElement addComments;
 
 	// step 4-Delivery method-continue button
 	@FindBy(xpath = "//*[@id=\"button-shipping-method\"]")
@@ -68,6 +72,11 @@ public class UniformCheckOutCartStepsPOM {
 
 		//freeShipping.click();
 		step4ContinueButton.click();
+	}
+	public void enterAddComments(String addcomment) {
+
+		
+		addComments.sendKeys(addcomment);
 	}
 	public void selectCheckBox() {
 
